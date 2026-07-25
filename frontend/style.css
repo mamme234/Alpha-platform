@@ -1,1 +1,68 @@
-// Boilerplate
+:root {
+    --bg-dark: #0B0E14;
+    --bg-card: #161B22;
+    --accent: #3b82f6;
+    --accent-glow: rgba(59, 130, 246, 0.5);
+    --success: #10b981;
+    --text-main: #e6edf3;
+    --text-dim: #8b949e;
+    --border: #30363d;
+    --font-main: 'Inter', -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-main);
+    overflow-x: hidden;
+}
+
+/* Glassmorphism Sidebar */
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    background: rgba(22, 27, 34, 0.8);
+    backdrop-filter: blur(10px);
+    border-right: 1px solid var(--border);
+    position: fixed;
+    padding: 20px;
+}
+
+/* Professional Buttons */
+.btn-primary {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.btn-primary:hover { transform: translateY(-2px); filter: brightness(1.2); }
+
+/* App Cards */
+.app-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: 0.3s;
+}
+
+.app-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-5px);
+}
+
+/* IDE Layout */
+.ide-container {
+    display: grid;
+    grid-template-columns: 250px 1fr 350px;
+    height: 100vh;
+                          }
