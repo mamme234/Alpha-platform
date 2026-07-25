@@ -1,1 +1,66 @@
-<html><body><h1>workspace.html</h1></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Alpha IDE</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.1.0/css/xterm.css" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #container { display: flex; height: 90vh; }
+        #sidebar { width: 200px; background: #1e1e1e; color: white; padding: 10px; }
+        #main-editor { flex-grow: 1; display: flex; flex-direction: column; }
+        #editor { height: 70%; border-bottom: 2px solid #333; }
+        #terminal { height: 30%; background: black; }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="sidebar">
+            <h3>Files</h3>
+            <ul id="file-list"></ul>
+            <button onclick="generateWithAI()">✨ AI Generate</button>
+        </div>
+        <div id="main-editor">
+            <div id="editor"></div>
+            <div id="terminal"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.33.0/min/vs/loader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xterm@5.1.0/lib/xterm.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <script>
+        const socket = io();
+        let editor;
+
+        // Init Monaco Editor
+        require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.33.0/min/vs' }});
+        require(['vs/editor/editor.main'], function () {
+            editor = monaco.editor.create(document.getElementById('editor'), {
+                value: "// Start coding...",
+                language: 'javascript',
+                theme: 'vs-dark'
+            });
+        });
+
+        // Init Terminal
+        const term = new Terminal();
+        term.open(document.getElementById('terminal'));
+        term.onData(data => socket.emit('terminal-input', data));
+        socket.on('terminal-output', data => term.write(data));
+
+        // AI Functionality
+        async function generateWithAI() {
+            const prompt = prompt("What app do you want to build?");
+            const res = await fetch('/api/ai/generate', {
+                method: 'POST',
+                body: JSON.stringify({ prompt }),
+                headers: {'Content-Type': 'application/json'}
+            });
+            const data = await res.json();
+            editor.setValue(data.code);
+        }
+    </script>
+</body>
+</html>
