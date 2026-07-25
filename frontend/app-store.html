@@ -1,1 +1,40 @@
-<html><body><h1>app-store.html</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Store | AlphaPlatform</title>
+</head>
+<body style="display: flex;">
+    <aside class="sidebar">
+        <h3>Categories</h3>
+        <ul style="list-style: none; margin-top: 20px; line-height: 2.5;">
+            <li style="color: var(--accent);">🔥 Trending</li>
+            <li>🤖 AI Agents</li>
+            <li>📊 Dashboards</li>
+            <li>🌐 Web Apps</li>
+            <li>🛠️ Dev Tools</li>
+        </ul>
+    </aside>
+
+    <main style="margin-left: 260px; padding: 40px; width: 100%;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+            <h1>Discover Apps</h1>
+            <input type="text" placeholder="Search apps..." style="background: var(--bg-card); border: 1px solid var(--border); padding: 10px; border-radius: 8px; width: 300px; color: white;">
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;">
+            <!-- App Card -->
+            <div class="app-card">
+                <div style="width: 50px; height: 50px; background: #3b82f6; border-radius: 10px; margin-bottom: 15px;"></div>
+                <h3>Nexus CRM</h3>
+                <p style="color: var(--text-dim); font-size: 0.9rem; margin: 10px 0;">AI-powered customer management system with real-time analytics.</p>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                    <span style="color: var(--success);">Free</span>
+                    <button class="btn-primary" style="padding: 5px 15px;">Install</button>
+                </div>
+            </div>
+            <!-- More Cards... -->
+        </div>
+    </main>
+</body>
+</html>
